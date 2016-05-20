@@ -3,7 +3,6 @@ package ua.martynenko.vacancymvc.service;
 /**
  * Created by Martynenko on 22.04.2016.
  */
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +36,12 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy entity = dao.findById(vacancy.getId());
         if(entity!=null){
             entity.setTitle(vacancy.getTitle());
-            entity.setSalary(vacancy.getSalary());
+            entity.setDate(vacancy.getDate());
             entity.setLink(vacancy.getLink());
-            entity.setDescription(vacancy.getDescription());
-            entity.setKeyWord(vacancy.getKeyWord());
-            entity.setSalary(vacancy.getSalary());
+            entity.setLocation(vacancy.getLocation());
+            entity.setResponsibilities(vacancy.getResponsibilities());
+            entity.setSkills_required(vacancy.getSkills_required());
+            entity.setProject_description(vacancy.getProject_description());
             entity.setType(vacancy.getType());
             entity.setCompany(vacancy.getCompany());
         }

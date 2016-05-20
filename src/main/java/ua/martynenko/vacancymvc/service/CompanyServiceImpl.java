@@ -36,9 +36,8 @@ public class CompanyServiceImpl implements CompanyService {
         Company entity = dao.findById(company.getId());
         if(entity!=null){
             entity.setName(company.getName());
-            entity.setCity(company.getCity());
-            entity.setCountry(company.getCountry());
-            entity.setCity(company.getCity());
+            entity.setOffices(company.getOffices());
+            entity.setLogo(company.getLogo());
             entity.setDescription(company.getDescription());
             entity.setUrl(company.getUrl());
         }

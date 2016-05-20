@@ -17,7 +17,7 @@ import java.util.List;
 public class AstoundStrategy implements Strategy {
 
     @Override
-    public List<Vacancy> getVacancies(String searchCity, String searchPrLanguage) {
+    public List<Vacancy> getVacancies() {
         List<Vacancy> listOfVacancies = new ArrayList<>();
         Document doc;
         try {

@@ -4,6 +4,8 @@ package ua.martynenko.vacancymvc.model;
  * Created by Martynenko on 22.04.2016.
  */
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -21,14 +23,14 @@ public class Company {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DESCRIPTION", nullable = true)
+    @Column(name = "DESCRIPTION", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "COUNTRY", nullable = true)
-    private String country;
+    @Column(name = "LOGO", nullable = true)
+    private String logo;
 
-    @Column(name = "CITY", nullable = true)
-    private String city;
+    @Column(name = "OFFICES", nullable = true)
+    private String offices;
 
     @Column(name = "URL", nullable = false)
     private String url;
@@ -58,20 +60,20 @@ public class Company {
         this.description = description;
     }
 
-    public String getCity() {
-        return city;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
-    public String getCountry() {
-        return country;
+    public String getOffices() {
+        return offices;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setOffices(String offices) {
+        this.offices = offices;
     }
 
     public String getUrl() {
@@ -114,8 +116,8 @@ public class Company {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
+                ", logo='" + logo + '\'' +
+                ", offices='" + offices + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }

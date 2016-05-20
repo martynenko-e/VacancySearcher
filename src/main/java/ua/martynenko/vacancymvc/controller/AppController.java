@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import ua.martynenko.vacancymvc.model.Company;
 import ua.martynenko.vacancymvc.model.Vacancy;
+import ua.martynenko.vacancymvc.parser.AstoundStrategy;
+import ua.martynenko.vacancymvc.parser.CompanyParse;
+import ua.martynenko.vacancymvc.parser.LuxoftStrategy;
 import ua.martynenko.vacancymvc.service.CompanyService;
 import ua.martynenko.vacancymvc.service.VacancyService;
 
@@ -133,7 +136,7 @@ public class AppController {
     public String deleteVacancy(@PathVariable String id) {
         String link = vacancyService.findById(Integer.valueOf(id)).getLink();
         vacancyService.deleteVacancyByLink(link);
-        return "redirect:/vacancy/list";
+        return "redirect:/vacancy/list/";
     }
 
 
@@ -211,7 +214,7 @@ public class AppController {
         }
 
         if (!serviceCompany.isCompanyUrlUnique(company.getId(), company.getUrl())) {
-            FieldError ssnError = new FieldError("company", "url", messageSource.getMessage("non.unique.ssn", new String[]{company.getUrl()}, Locale.getDefault()));
+            FieldError ssnError = new FieldError("company", "url", messageSource.getMessage("non.unique.link", new String[]{company.getUrl()}, Locale.getDefault()));
             result.addError(ssnError);
             return "addcompany";
         }
@@ -229,12 +232,44 @@ public class AppController {
     @RequestMapping(value = {"/company/delete-{url}-company/"}, method = RequestMethod.GET)
     public String deleteCompany(@PathVariable String url) {
         serviceCompany.deleteCompanyByUrl(url);
-        return "redirect:/company/list";
+        return "redirect:/company/list/";
     }
 
     @ModelAttribute("companies")
     public List<Company> initializeProfiles() {
         return serviceCompany.findAllCompanies();
+    }
+
+
+    @RequestMapping(value = {"/parse/{name}-company/"}, method = RequestMethod.GET)
+    public String parseCompany(@PathVariable String name) {
+        if (name.equals("add")) {
+            for (Company company: new CompanyParse().getCompanies()) {
+                if (serviceCompany.findCompanyByUrl(company.getUrl()) == null) {
+                    serviceCompany.saveCompany(company);
+                }
+            }
+            return "redirect:/company/list/";
+        }
+        if (name.equals("astound")) {
+            for (Vacancy vacancy: new AstoundStrategy().getVacancies()) {
+                if (vacancyService.findVacancyByLink(vacancy.getLink()) == null){
+                    vacancy.setCompany(serviceCompany.findCompanyByUrl("http://www.astound.com.ua/"));
+                    vacancyService.saveVacancy(vacancy);
+                }
+            }
+        }
+
+        if (name.equals("luxoft")) {
+            for (Vacancy vacancy: new LuxoftStrategy().getVacancies()) {
+                if (vacancyService.findVacancyByLink(vacancy.getLink()) == null){
+                    vacancy.setCompany(serviceCompany.findCompanyByUrl("http://www.luxoft.com/"));
+                    vacancyService.saveVacancy(vacancy);
+                }
+            }
+        }
+
+        return "redirect:/vacancy/list/";
     }
 
 }
