@@ -40,7 +40,8 @@ public class AppController {
      */
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String index(ModelMap model) {
-        model.addAttribute("message", "Hello on main page");
+        List<Company> companies = serviceCompany.findAllShowCompanies();
+        model.addAttribute("companies", companies);
         return "index";
     }
 
@@ -264,7 +265,11 @@ public class AppController {
             for (Vacancy vacancy: new LuxoftStrategy().getVacancies()) {
                 if (vacancyService.findVacancyByLink(vacancy.getLink()) == null){
                     vacancy.setCompany(serviceCompany.findCompanyByUrl("http://www.luxoft.com/"));
+                    vacancy.setActive(true);
                     vacancyService.saveVacancy(vacancy);
+                } else {
+                    vacancy.setActive(false);
+                    vacancyService.updateVacancy(vacancy);
                 }
             }
         }
