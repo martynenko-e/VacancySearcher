@@ -10,10 +10,15 @@
 <%@include file="includes/nav_bar.jsp" %>
 <div class="container">
     <div class="col-sm-6">
-        <h4>Present parsers:</h4>
-        Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>
-        Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>
-        Parse <a href="<c:url value='/parse/add-company/' />">Add Companies</a><br/>
+        <div class="row">
+            <h4>Present parsers:</h4>
+            <%--Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>--%>
+            <%--Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>--%>
+            <%--Parse <a href="<c:url value='/parse/add-company/' />">Add Companies</a><br/>--%>
+        </div>
+        <div class="row">
+            <h4>Useful links:</h4>
+        </div>
     </div>
     <div class="col-sm-6">
 
