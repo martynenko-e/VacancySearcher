@@ -3,12 +3,9 @@ package ua.martynenko.vacancymvc.model;
 /**
  * Created by Martynenko on 22.04.2016.
  */
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity
@@ -42,10 +39,11 @@ public class Vacancy {
     @Column(name = "LINK", unique=true, nullable = false)
     private String link;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Type(type="date")
     @Column(name = "DATE", nullable = true)
     private Date date;
+
+    @Column(name = "ACTIVE", nullable = true,  columnDefinition = "TINYINT(1)")
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COMPANY_ID", nullable = false)
@@ -129,6 +127,14 @@ public class Vacancy {
 
     public void setSkills_required(String skills_required) {
         this.skills_required = skills_required;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override

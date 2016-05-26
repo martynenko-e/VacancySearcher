@@ -17,5 +17,7 @@ public interface CompanyDao {
 
     List<Company> findAllCompanies();
 
+    List<Company> findAllShowCompanies();
+
     Company findCompanyByUrl(String url);
 }

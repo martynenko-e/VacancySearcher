@@ -8,21 +8,25 @@
 <body>
 <%@include file="includes/nav_bar.jsp" %>
 
-<div class="container">
-    <c:forEach items="${companies}" var="company">
-        <div class="row table-bordered">
-            <div class="col-xs-4 col-md-4">
+<div id="sidebar-wrapper" class="sidebar-toggle">
+    <h4>Filters</h4>
+</div>
+<div class="page-content">
+    <div class="container">
+        <c:forEach items="${companies}" var="company">
+            <div class="col-xs-5 col-md-5 table-bordered single-company">
                 <h2>${company.name}</h2>
+
                 <p><a href="${company.url}">${company.url}</a></p>
+
                 <p><img src="<c:url value='${company.logo}'/>"></p>
+
                 <p>${company.offices}</p>
             </div>
-            <div class="col-xs-8 col-md-8">
-                <p>${fn:substring(company.description, 0, 1000)}...</p>
-            </div>
-        </div>
-        </br>
-    </c:forEach>
+
+        </c:forEach>
+    </div>
 </div>
+
 </body>
 </html>

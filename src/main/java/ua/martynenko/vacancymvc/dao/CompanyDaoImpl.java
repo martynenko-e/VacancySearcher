@@ -34,6 +34,13 @@ public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements Com
         return (List<Company>) criteria.list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Company> findAllShowCompanies() {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("showOnMain", Boolean.TRUE));
+        return (List<Company>) criteria.list();
+    }
+
     public Company findCompanyByUrl(String url) {
         Criteria criteria = createEntityCriteria();
         criteria.add(Restrictions.eq("url", url));

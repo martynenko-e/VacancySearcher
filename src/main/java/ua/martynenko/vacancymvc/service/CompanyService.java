@@ -19,6 +19,8 @@ public interface CompanyService {
 
     List<Company> findAllCompanies();
 
+    List<Company> findAllShowCompanies();
+
     Company findCompanyByUrl(String url);
 
     boolean isCompanyUrlUnique(Integer id, String url);

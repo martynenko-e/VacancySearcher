@@ -9,3 +9,37 @@ td {
 a {
     font-size: 14px;
 }
+
+.single-company {
+    height: 250px;
+    margin: 1% 1% 1% 1%;
+}
+
+#sidebar-wrapper {
+    top: 52px;
+    left: -200px;
+    width: 200px;
+    color: #969696;
+    position: fixed;
+    height: 200px;
+    z-index: 1;
+    margin: 3% 2% 2% 2%;
+    padding: 10px;
+}
+
+#sidebar-wrapper.sidebar-toggle {
+    transition: all 0.3s ease-out;
+    margin-left: -190px;
+}
+
+.page-content {
+    margin-left: 200px;
+}
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper.sidebar-toggle {
+        transition: 0s;
+        left: 200px;
+    }
+}

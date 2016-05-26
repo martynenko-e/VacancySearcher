@@ -35,6 +35,8 @@ public class Company {
     @Column(name = "URL", nullable = false)
     private String url;
 
+    @Column(name = "SHOWONMAIN", nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean showOnMain;
 
     public int getId() {
         return id;
@@ -82,6 +84,14 @@ public class Company {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Boolean getShowOnMain() {
+        return showOnMain;
+    }
+
+    public void setShowOnMain(Boolean showOnMain) {
+        this.showOnMain = showOnMain;
     }
 
     @Override

@@ -51,6 +51,10 @@ public class CompanyServiceImpl implements CompanyService {
         return dao.findAllCompanies();
     }
 
+    public List<Company> findAllShowCompanies() {
+        return dao.findAllShowCompanies();
+    }
+
     public Company findCompanyByUrl(String url) {
         return dao.findCompanyByUrl(url);
     }
