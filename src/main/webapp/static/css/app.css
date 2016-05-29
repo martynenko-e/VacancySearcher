@@ -43,3 +43,8 @@ a {
         left: 200px;
     }
 }
+
+th{
+    text-align: center;
+    font-size: 20%;
+}

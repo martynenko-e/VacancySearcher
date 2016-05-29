@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 <html>
 <head>
     <head>
@@ -16,22 +17,16 @@
 </div>
 <div class="page-content">
     <div class="container">
-        <c:forEach items="${vacancies}" var="vacancy">
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <p><a href="${vacancy.link}">${vacancy.title}</a></p>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <p>${vacancy.type}</p>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <p>${vacancy.company.name}</p>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <p><fmt:formatDate value="${vacancy.date}" pattern="dd-MM-yyyy"/></p>
-                </div>
-            </div>
-        </c:forEach>
+
+        <display:table class="table table-hover" id="data" name="vacancies" requestURI="/vacancy/list/">
+            <display:column title="Title" sortable="true">
+                <a href="${data.link}">${data.title}</a>
+            </display:column>
+            <display:column property="type" title="Type" sortable="true"/>
+            <display:column property="company.name" title="Company" sortable="true"/>
+            <display:column property="date" format="{0,date,dd-MM-yyyy}" title="Date" sortable="true"/>
+        </display:table>
+
     </div>
 </div>
 </body>
