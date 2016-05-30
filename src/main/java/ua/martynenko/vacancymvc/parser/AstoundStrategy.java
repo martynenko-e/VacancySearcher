@@ -11,9 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by vladimir on 21.01.16.
- */
+
 public class AstoundStrategy implements Strategy {
 
     @Override
