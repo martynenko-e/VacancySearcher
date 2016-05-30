@@ -9,13 +9,15 @@ import java.util.List;
  */
 public interface CompanyDao {
 
-    Company findById(int id);
+    Company findById(Integer id);
 
     void saveCompany(Company company);
 
     void deleteCompanyByUrl(String url);
 
     List<Company> findAllCompanies();
+
+    List<Company> findAllShowCompanies();
 
     Company findCompanyByUrl(String url);
 }

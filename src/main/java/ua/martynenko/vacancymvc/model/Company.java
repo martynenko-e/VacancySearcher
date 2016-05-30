@@ -3,7 +3,6 @@ package ua.martynenko.vacancymvc.model;
 /**
  * Created by Martynenko on 22.04.2016.
  */
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -15,30 +14,36 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="COMPANY_ID")
-    private int id;
+    private Integer id;
 
     @Size(min=3, max=100)
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DESCRIPTION", nullable = true)
+    @Size(min=3, max=100)
+    @Column(name = "ALIAS", nullable = false)
+    private String alias;
+
+    @Column(name = "DESCRIPTION", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "COUNTRY", nullable = true)
-    private String country;
+    @Column(name = "LOGO", nullable = true)
+    private String logo;
 
-    @Column(name = "CITY", nullable = true)
-    private String city;
+    @Column(name = "OFFICES", nullable = true)
+    private String offices;
 
     @Column(name = "URL", nullable = false)
     private String url;
 
+    @Column(name = "SHOWONMAIN", nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean showOnMain;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,20 +63,20 @@ public class Company {
         this.description = description;
     }
 
-    public String getCity() {
-        return city;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
-    public String getCountry() {
-        return country;
+    public String getOffices() {
+        return offices;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setOffices(String offices) {
+        this.offices = offices;
     }
 
     public String getUrl() {
@@ -80,6 +85,22 @@ public class Company {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Boolean getShowOnMain() {
+        return showOnMain;
+    }
+
+    public void setShowOnMain(Boolean showOnMain) {
+        this.showOnMain = showOnMain;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     @Override
@@ -98,7 +119,7 @@ public class Company {
         if (!(obj instanceof Company))
             return false;
         Company other = (Company) obj;
-        if (id != other.id)
+        if (!id.equals(other.id))
             return false;
         if (url == null) {
             if (other.url != null)
@@ -114,8 +135,8 @@ public class Company {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
+                ", logo='" + logo + '\'' +
+                ", offices='" + offices + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }

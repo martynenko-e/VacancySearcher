@@ -73,13 +73,6 @@
             <version>${mysql.connector.version}</version>
         </dependency>
 
-        <!-- Joda-Time -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-        </dependency>
-
         <!-- To map JodaTime with database type -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
@@ -104,6 +97,11 @@
             <version>1.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.2</version>
+        </dependency>
 
         <!-- Testing dependencies -->
         <dependency>
@@ -163,8 +161,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

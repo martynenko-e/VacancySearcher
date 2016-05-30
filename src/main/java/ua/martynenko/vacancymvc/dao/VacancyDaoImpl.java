@@ -40,4 +40,11 @@ public class VacancyDaoImpl extends AbstractDao<Integer, Vacancy> implements Vac
         criteria.add(Restrictions.eq("link", link));
         return (Vacancy) criteria.uniqueResult();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Vacancy> findVacanciesByCompany(int company_id) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("company.id", company_id));
+        return (List<Vacancy>) criteria.list();
+    }
 }

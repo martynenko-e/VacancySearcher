@@ -9,7 +9,7 @@ import ua.martynenko.vacancymvc.model.Company;
 
 public interface CompanyService {
 
-    Company findById(int id);
+    Company findById(Integer id);
 
     void saveCompany(Company company);
 
@@ -19,8 +19,11 @@ public interface CompanyService {
 
     List<Company> findAllCompanies();
 
+    List<Company> findAllShowCompanies();
+
     Company findCompanyByUrl(String url);
 
     boolean isCompanyUrlUnique(Integer id, String url);
+
 
 }

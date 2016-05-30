@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements CompanyDao {
-    public Company findById(int id) {
+    public Company findById(Integer id) {
         return getByKey(id);
     }
 
@@ -31,6 +31,13 @@ public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements Com
     @SuppressWarnings("unchecked")
     public List<Company> findAllCompanies() {
         Criteria criteria = createEntityCriteria();
+        return (List<Company>) criteria.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Company> findAllShowCompanies() {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("showOnMain", Boolean.TRUE));
         return (List<Company>) criteria.list();
     }
 

@@ -3,12 +3,9 @@ package ua.martynenko.vacancymvc.model;
 /**
  * Created by Martynenko on 22.04.2016.
  */
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity
@@ -27,22 +24,26 @@ public class Vacancy {
     @Column(name = "TYPE", nullable = true)
     private String type;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Type(type="date")
-    @Column(name = "DATE", nullable = true)
-    private Date date;
+    @Column(name = "LOCATION", nullable = true)
+    private String location;
 
-    @Column(name = "SALARY", nullable = true)
-    private float salary;
+    @Column(name = "PROJECT_DESCRIPTION", nullable = true, columnDefinition = "TEXT")
+    private String project_description;
 
-    @Column(name = "DESCRIPTION", nullable = true)
-    private String description;
+    @Column(name = "RESPONSIBILITIES", nullable = true, columnDefinition = "TEXT")
+    private String responsibilities;
 
-    @Column(name = "KEYWORD", nullable = true)
-    private String keyWord;
+    @Column(name = "SKILLS_REQUIRED", nullable = true, columnDefinition = "TEXT")
+    private String skills_required;
 
     @Column(name = "LINK", unique=true, nullable = false)
     private String link;
+
+    @Column(name = "DATE", nullable = true)
+    private Date date;
+
+    @Column(name = "ACTIVE", nullable = true,  columnDefinition = "TINYINT(1)")
+    private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COMPANY_ID", nullable = false)
@@ -80,30 +81,6 @@ public class Vacancy {
         this.date = date;
     }
 
-    public float getSalary() {
-        return salary;
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getKeyWord() {
-        return keyWord;
-    }
-
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
-    }
-
     public String getLink() {
         return link;
     }
@@ -120,6 +97,45 @@ public class Vacancy {
         this.company = company;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getProject_description() {
+        return project_description;
+    }
+
+    public void setProject_description(String project_description) {
+        this.project_description = project_description;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(String responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
+    public String getSkills_required() {
+        return skills_required;
+    }
+
+    public void setSkills_required(String skills_required) {
+        this.skills_required = skills_required;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     @Override
     public int hashCode() {
@@ -146,11 +162,12 @@ public class Vacancy {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
-                ", date=" + date +
-                ", salary=" + salary +
-                ", description='" + description + '\'' +
-                ", keyWord='" + keyWord + '\'' +
+                ", location='" + location + '\'' +
+                ", project_description='" + project_description + '\'' +
+                ", responsibilities='" + responsibilities + '\'' +
+                ", skills_required='" + skills_required + '\'' +
                 ", link='" + link + '\'' +
+                ", date=" + date +
                 ", company=" + company +
                 '}';
     }
