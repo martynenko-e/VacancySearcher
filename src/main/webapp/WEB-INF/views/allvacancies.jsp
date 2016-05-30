@@ -4,21 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 <html>
-<head>
-    <head>
-        <%@include file="includes/header.jsp" %>
-    </head>
-</head>
+<%@include file="includes/header.jsp" %>
 <body>
 <%@include file="includes/nav_bar.jsp" %>
-
-<div id="sidebar-wrapper" class="sidebar-toggle">
-    <h4>Filters</h4>
-</div>
 <div class="page-content">
     <div class="container">
 
-        <display:table class="table table-hover table-responsive" id="data" name="vacancies" requestURI="/vacancy/list/">
+        <display:table class="table table-hover table-responsive" id="data" name="vacancies"
+                       requestURI="/vacancy/list/">
             <display:column title="Title" sortable="true">
                 <a href="${data.link}">${data.title}</a>
             </display:column>
@@ -32,5 +25,19 @@
 
     </div>
 </div>
+<script language="javascript" type="text/javascript">
+    var tableFilters = {
+        btn: false,
+        col_0: "none",
+        col_1: "select",
+        col_2: "select",
+        col_3: "select",
+        col_4: "none",
+        rows_counter: true,
+        btn_reset: true,
+        btn_text: "  >  "
+    };
+    setFilterGrid("data", 0, tableFilters);
+</script>
 </body>
 </html>

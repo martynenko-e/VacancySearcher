@@ -2,15 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
-<head>
-    <%@include file="includes/header.jsp" %>
-</head>
+<%@include file="includes/header.jsp" %>
 <body>
 <%@include file="includes/nav_bar.jsp" %>
-
-<div id="sidebar-wrapper" class="sidebar-toggle">
-    <h4>Filters</h4>
-</div>
 <div class="page-content">
     <div class="container">
         <c:forEach items="${companies}" var="company">
