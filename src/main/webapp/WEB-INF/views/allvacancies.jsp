@@ -28,14 +28,13 @@
 <script language="javascript" type="text/javascript">
     var tableFilters = {
         btn: false,
-        col_0: "none",
         col_1: "select",
         col_2: "select",
         col_3: "select",
         col_4: "none",
         rows_counter: true,
         btn_reset: true,
-        btn_text: "  >  "
+        btn_text: "  >  ",
     };
     setFilterGrid("data", 0, tableFilters);
 </script>

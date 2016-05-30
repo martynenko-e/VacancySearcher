@@ -4,20 +4,16 @@ package ua.martynenko.vacancymvc.controller;
  * Created by Martynenko on 22.04.2016.
  */
 import java.util.List;
-import java.util.Locale;
-
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.annotation.*;
 
 import ua.martynenko.vacancymvc.model.Company;
 import ua.martynenko.vacancymvc.model.Vacancy;
-import ua.martynenko.vacancymvc.parser.AstoundStrategy;
+import ua.martynenko.vacancymvc.parser.CiklumStrategy;
 import ua.martynenko.vacancymvc.parser.CompanyParse;
 import ua.martynenko.vacancymvc.parser.LuxoftStrategy;
 import ua.martynenko.vacancymvc.service.CompanyService;
@@ -107,10 +103,10 @@ public class AppController {
             }
             return "redirect:/company/list/";
         }
-        if (name.equals("astound")) {
-            for (Vacancy vacancy: new AstoundStrategy().getVacancies()) {
+        if (name.equals("ciklum")) {
+            for (Vacancy vacancy: new CiklumStrategy().getVacancies()) {
                 if (vacancyService.findVacancyByLink(vacancy.getLink()) == null){
-                    vacancy.setCompany(serviceCompany.findCompanyByUrl("http://www.astound.com.ua/"));
+                    vacancy.setCompany(serviceCompany.findCompanyByUrl("http://www.ciklum.com/"));
                     vacancyService.saveVacancy(vacancy);
                 }
             }

@@ -11,7 +11,7 @@
         <div class="col-sm-6">
             <div class="row">
                 <h4>Present parsers:</h4>
-                Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>
+                Parse <a href="<c:url value='/parse/ciklum-company/' />">Ciklum Company</a><br/>
                 Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>
             </div>
             <div class="row">
