@@ -55,6 +55,10 @@ public class VacancyServiceImpl implements VacancyService {
         return dao.findAllVacancies();
     }
 
+    public List<Vacancy> findVacanciesByCompany(int company_id) {
+        return dao.findVacanciesByCompany(company_id);
+    }
+
     public Vacancy findVacancyByLink(String link) {
         return dao.findVacancyByLink(link);
     }

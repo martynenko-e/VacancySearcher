@@ -19,6 +19,8 @@ public interface VacancyService {
 
     List<Vacancy> findAllVacancies();
 
+    List<Vacancy> findVacanciesByCompany(int company_id);
+
     Vacancy findVacancyByLink(String link);
 
     boolean isVacancyLinkUnique(Integer id, String link);

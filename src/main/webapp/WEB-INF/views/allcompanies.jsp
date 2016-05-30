@@ -14,8 +14,9 @@
 <div class="page-content">
     <div class="container">
         <c:forEach items="${companies}" var="company">
+
             <div class="col-xs-5 col-md-5 table-bordered single-company">
-                <h2>${company.name}</h2>
+                <a href="/company/${company.id}-about/"><h2>${company.name}</h2></a>
 
                 <p><a href="${company.url}">${company.url}</a></p>
 

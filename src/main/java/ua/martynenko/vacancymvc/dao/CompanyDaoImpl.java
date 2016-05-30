@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements CompanyDao {
-    public Company findById(int id) {
+    public Company findById(Integer id) {
         return getByKey(id);
     }
 

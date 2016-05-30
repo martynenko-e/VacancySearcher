@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface CompanyDao {
 
-    Company findById(int id);
+    Company findById(Integer id);
 
     void saveCompany(Company company);
 

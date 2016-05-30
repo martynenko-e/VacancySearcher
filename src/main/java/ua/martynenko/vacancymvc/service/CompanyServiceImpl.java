@@ -3,6 +3,7 @@ package ua.martynenko.vacancymvc.service;
 /**
  * Created by Martynenko on 23.04.2016.
  */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyDao dao;
 
-    public Company findById(int id) {
+    public Company findById(Integer id) {
         return dao.findById(id);
     }
 
@@ -34,7 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
      */
     public void updateCompany(Company company) {
         Company entity = dao.findById(company.getId());
-        if(entity!=null){
+        if (entity != null) {
             entity.setName(company.getName());
             entity.setOffices(company.getOffices());
             entity.setLogo(company.getLogo());
@@ -61,7 +62,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     public boolean isCompanyUrlUnique(Integer id, String url) {
         Company company = findCompanyByUrl(url);
-        return ( company == null || ((id != null) && (company.getId() == id)));
+        return (company == null || ((id != null) && (company.getId() == id)));
     }
 
 }

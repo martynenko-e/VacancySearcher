@@ -18,12 +18,15 @@
 <div class="page-content">
     <div class="container">
 
-        <display:table class="table table-hover" id="data" name="vacancies" requestURI="/vacancy/list/">
+        <display:table class="table table-hover table-responsive" id="data" name="vacancies" requestURI="/vacancy/list/">
             <display:column title="Title" sortable="true">
                 <a href="${data.link}">${data.title}</a>
             </display:column>
             <display:column property="type" title="Type" sortable="true"/>
-            <display:column property="company.name" title="Company" sortable="true"/>
+            <display:column property="location" title="Location" sortable="true"/>
+            <display:column title="Company" sortable="true">
+                <a href="/company/${data.company.id}-about/">${data.company.name}</a>
+            </display:column>
             <display:column property="date" format="{0,date,dd-MM-yyyy}" title="Date" sortable="true"/>
         </display:table>
 

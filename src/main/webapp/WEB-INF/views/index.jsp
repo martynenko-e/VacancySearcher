@@ -12,9 +12,9 @@
     <div class="col-sm-6">
         <div class="row">
             <h4>Present parsers:</h4>
-            <%--Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>--%>
-            <%--Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>--%>
-            <%--Parse <a href="<c:url value='/parse/add-company/' />">Add Companies</a><br/>--%>
+            Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>
+            Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>
+            Parse <a href="<c:url value='/parse/add-company/' />">Add Companies</a><br/>
         </div>
         <div class="row">
             <h4>Useful links:</h4>
@@ -25,7 +25,7 @@
         <h4>Top companies:</h4>
         <c:forEach items="${companies}" var="company">
             <div class="col-sm-6">
-                <a href="${company.url}"><img src="<c:url value='${company.logo}'/>" alt="${company.name}"></a>
+                <a href="/company/${company.id}-about/"><img src="<c:url value='${company.logo}'/>" alt="${company.name}"/></a>
             </div>
         </c:forEach>
 

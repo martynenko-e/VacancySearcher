@@ -35,9 +35,7 @@ public class AppController {
     @Autowired
     MessageSource messageSource;
 
-    /*
-     * This method will list all existing employees.
-     */
+
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String index(ModelMap model) {
         List<Company> companies = serviceCompany.findAllShowCompanies();
@@ -54,84 +52,7 @@ public class AppController {
     }
 
     /*
-     * This method will provide the medium to add a new employee.
-     */
-    @RequestMapping(value = {"/vacancy/new/"}, method = RequestMethod.GET)
-    public String newVacancy(ModelMap model) {
-        Vacancy vacancy = new Vacancy();
-        model.addAttribute("vacancy", vacancy);
-        model.addAttribute("edit", false);
-        return "addvacancy";
-    }
-
-    /*
-     * This method will be called on form submission, handling POST request for
-     * saving vacancy in database. It also validates the user input
-     */
-    @RequestMapping(value = {"/vacancy/new/"}, method = RequestMethod.POST)
-    public String saveVacancy(Vacancy vacancy, BindingResult result,
-                              ModelMap model) {
-
-        if (result.hasErrors()) {
-            return "addvacancy";
-        }
-        /*
-         * Preferred way to achieve uniqueness of field [ssn] should be implementing custom @Unique annotation
-         * and applying it on field [ssn] of Model class [Vacancy].
-         *
-         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-         * framework as well while still using internationalized messages.
-         *
-         */
-        if (!vacancyService.isVacancyLinkUnique(vacancy.getId(), vacancy.getLink())) {
-            FieldError linkError = new FieldError("vacancy", "link", messageSource.getMessage("non.unique.link", new String[]{vacancy.getLink()}, Locale.getDefault()));
-            result.addError(linkError);
-            return "addvacancy";
-        }
-        vacancyService.saveVacancy(vacancy);
-        model.addAttribute("success", "Vacancy " + vacancy.getTitle() + " registered successfully");
-        return "success";
-    }
-
-
-    /*
-     * This method will provide the medium to update an existing employee.
-     */
-    @RequestMapping(value = {"/vacancy/edit-{id}-vacancy/"}, method = RequestMethod.GET)
-    public String editVacancy(@PathVariable String id, ModelMap model) {
-        Vacancy vacancy = vacancyService.findById(Integer.valueOf(id));
-        model.addAttribute("vacancy", vacancy);
-        model.addAttribute("edit", true);
-        return "addvacancy";
-    }
-
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating vacancy in database. It also validates the user input
-     */
-    @RequestMapping(value = {"/vacancy/edit-{id}-vacancy/"}, method = RequestMethod.POST)
-    public String updateVacancy(@Valid Vacancy vacancy, BindingResult result,
-                                ModelMap model, @PathVariable String id) {
-
-        if (result.hasErrors()) {
-            return "addvacancy";
-        }
-
-        if (!vacancyService.isVacancyLinkUnique(vacancy.getId(), vacancy.getLink())) {
-            FieldError linkError = new FieldError("vacancy", "link", messageSource.getMessage("non.unique.link", new String[]{vacancy.getLink()}, Locale.getDefault()));
-            result.addError(linkError);
-            return "addvacancy";
-        }
-
-        vacancyService.updateVacancy(vacancy);
-
-        model.addAttribute("success", "Vacancy " + vacancy.getTitle() + " updated successfully");
-        return "success";
-    }
-
-
-    /*
-     * This method will delete an employee by it's SSN value.
+     * This method will delete an vacancy by it's link value.
      */
     @RequestMapping(value = {"/vacancy/delete-{id}-vacancy/"}, method = RequestMethod.GET)
     public String deleteVacancy(@PathVariable String id) {
@@ -149,83 +70,14 @@ public class AppController {
         return "allcompanies";
     }
 
-    /*
-     * This method will provide the medium to add a new company.
-     */
-    @RequestMapping(value = {"/company/new/"}, method = RequestMethod.GET)
-    public String newCompany(ModelMap model) {
-        Company company = new Company();
+    @RequestMapping(value = {"/company/{id}-about/"}, method = RequestMethod.GET)
+    public String aboutCompany(ModelMap model, @PathVariable Integer id) {
+        Company company = serviceCompany.findById(id);
+        List<Vacancy> vacancies = vacancyService.findVacanciesByCompany(id);
         model.addAttribute("company", company);
-        model.addAttribute("edit", false);
-        return "addcompany";
+        model.addAttribute("vacancies", vacancies);
+        return "companyinfo";
     }
-
-    /*
-     * This method will be called on form submission, handling POST request for
-     * saving company in database. It also validates the user input
-     */
-    @RequestMapping(value = {"/company/new/"}, method = RequestMethod.POST)
-    public String saveCompany(@Valid Company company, BindingResult result,
-                              ModelMap model) {
-
-        if (result.hasErrors()) {
-            return "addcompany";
-        }
-
-        /*
-         * Preferred way to achieve uniqueness of field [url] should be implementing custom @Unique annotation
-         * and applying it on field [ssn] of Model class [Company].
-         *
-         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-         * framework as well while still using internationalized messages.
-         *
-         */
-        if (!serviceCompany.isCompanyUrlUnique(company.getId(), company.getUrl())) {
-            return "addcompany";
-        }
-
-        serviceCompany.saveCompany(company);
-
-        model.addAttribute("success", "Company " + company.getName() + " company added successfully");
-        return "success";
-    }
-
-
-    /*
-     * This method will provide the medium to update an existing company.
-     */
-    @RequestMapping(value = {"/company/edit-{url}-company/"}, method = RequestMethod.GET)
-    public String editCompany(@PathVariable String url, ModelMap model) {
-        Company company = serviceCompany.findCompanyByUrl(url);
-        model.addAttribute("company", company);
-        model.addAttribute("edit", true);
-        return "addcompany";
-    }
-
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating company in database. It also validates the user input
-     */
-    @RequestMapping(value = {"/company/edit-{url}-company/"}, method = RequestMethod.POST)
-    public String updateCompany(@Valid Company company, BindingResult result,
-                                ModelMap model, @PathVariable String url) {
-
-        if (result.hasErrors()) {
-            return "addcompany";
-        }
-
-        if (!serviceCompany.isCompanyUrlUnique(company.getId(), company.getUrl())) {
-            FieldError ssnError = new FieldError("company", "url", messageSource.getMessage("non.unique.link", new String[]{company.getUrl()}, Locale.getDefault()));
-            result.addError(ssnError);
-            return "addcompany";
-        }
-
-        serviceCompany.updateCompany(company);
-
-        model.addAttribute("success", "Company " + company.getName() + " updated successfully");
-        return "success";
-    }
-
 
     /*
      * This method will delete an company by it's Url value.
@@ -236,6 +88,9 @@ public class AppController {
         return "redirect:/company/list/";
     }
 
+    /*
+    * This method initialize all companies for any controller
+    */
     @ModelAttribute("companies")
     public List<Company> initializeProfiles() {
         return serviceCompany.findAllCompanies();

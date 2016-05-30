@@ -36,19 +36,21 @@ public class CompanyParse {
                     String companySite = companyElement.select(".site a").attr("href");
                     Whitelist whitelist = Whitelist.basic();
                     String companyDescription = Jsoup.clean(doc.select(".b-company-about .b-typo").first().html(), whitelist);
+                    String alias = companyName.replaceAll("[^A-Za-z0-9]", "-").toLowerCase();
                     Company company = new Company();
                     company.setName(companyName);
+                    company.setAlias(alias);
                     company.setDescription(companyDescription);
                     company.setUrl(companySite);
                     company.setOffices(companyOffices);
                     company.setShowOnMain(false);
-                    String logoName = companyName.replaceAll("[^A-Za-z0-9]", "-").toLowerCase();
+
                     try {
-                        getImages(companyLogo, logoName);
+                        getImages(companyLogo, alias);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    company.setLogo(String.format("/static/images/%s.png", logoName));
+                    company.setLogo(String.format("/static/images/%s.png", alias));
                     listOfCompanies.add(company);
                 }
             }
