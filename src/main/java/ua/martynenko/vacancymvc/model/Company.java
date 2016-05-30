@@ -3,9 +3,6 @@ package ua.martynenko.vacancymvc.model;
 /**
  * Created by Martynenko on 22.04.2016.
  */
-
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -17,11 +14,15 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="COMPANY_ID")
-    private int id;
+    private Integer id;
 
     @Size(min=3, max=100)
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Size(min=3, max=100)
+    @Column(name = "ALIAS", nullable = false)
+    private String alias;
 
     @Column(name = "DESCRIPTION", nullable = true, columnDefinition = "TEXT")
     private String description;
@@ -38,11 +39,11 @@ public class Company {
     @Column(name = "SHOWONMAIN", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean showOnMain;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -94,6 +95,14 @@ public class Company {
         this.showOnMain = showOnMain;
     }
 
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     @Override
     public int hashCode() {
         int result = id;
@@ -110,7 +119,7 @@ public class Company {
         if (!(obj instanceof Company))
             return false;
         Company other = (Company) obj;
-        if (id != other.id)
+        if (!id.equals(other.id))
             return false;
         if (url == null) {
             if (other.url != null)
