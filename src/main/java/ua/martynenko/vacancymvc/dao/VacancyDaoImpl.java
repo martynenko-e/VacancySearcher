@@ -40,6 +40,13 @@ public class VacancyDaoImpl extends AbstractDao<Integer, Vacancy> implements Vac
         criteria.add(Restrictions.eq("link", link));
         return (Vacancy) criteria.uniqueResult();
     }
+        // specially for AbSoft
+    public Vacancy findVacancyByLink(String link, String title) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("link", link));
+        criteria.add(Restrictions.eq("title", title));
+        return (Vacancy) criteria.uniqueResult();
+    }
 
     @SuppressWarnings("unchecked")
     public List<Vacancy> findVacanciesByCompany(int company_id) {

@@ -15,6 +15,7 @@
             Parse <a href="<c:url value='/parse/astound-company/' />">Astound Company</a><br/>
             Parse <a href="<c:url value='/parse/luxoft-company/' />">Luxoft Company</a><br/>
             Parse <a href="<c:url value='/parse/add-company/' />">Add Companies</a><br/>
+            Parse <a href="<c:url value='/parse/intropro-llc-company/' />">Intropro Company</a><br/>
         </div>
         <div class="row">
             <h4>Useful links:</h4>

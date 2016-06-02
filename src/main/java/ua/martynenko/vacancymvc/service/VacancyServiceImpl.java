@@ -63,6 +63,10 @@ public class VacancyServiceImpl implements VacancyService {
         return dao.findVacancyByLink(link);
     }
 
+    public Vacancy findVacancyByLink(String link, String title) {
+        return dao.findVacancyByLink(link, title);
+    }
+
     public boolean isVacancyLinkUnique(Integer id, String link) {
         Vacancy vacancy = findVacancyByLink(link);
         return ( vacancy == null || ((id != null) && (vacancy.getId() == id)));

@@ -23,6 +23,8 @@ public interface VacancyService {
 
     Vacancy findVacancyByLink(String link);
 
+    Vacancy findVacancyByLink(String link, String title);
+
     boolean isVacancyLinkUnique(Integer id, String link);
 
 }

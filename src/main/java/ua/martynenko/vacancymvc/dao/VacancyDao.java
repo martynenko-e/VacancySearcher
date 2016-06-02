@@ -19,6 +19,8 @@ public interface VacancyDao {
 
     Vacancy findVacancyByLink(String link);
 
+    Vacancy findVacancyByLink(String link, String title);
+
     List<Vacancy> findVacanciesByCompany(int company_id);
 
 }

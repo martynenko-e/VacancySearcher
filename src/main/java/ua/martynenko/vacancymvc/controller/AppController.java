@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import ua.martynenko.vacancymvc.model.Company;
 import ua.martynenko.vacancymvc.model.Vacancy;
 import ua.martynenko.vacancymvc.parser.AstoundStrategy;
 import ua.martynenko.vacancymvc.parser.CompanyParse;
+import ua.martynenko.vacancymvc.parser.IntroproStrategy;
 import ua.martynenko.vacancymvc.parser.LuxoftStrategy;
 import ua.martynenko.vacancymvc.service.CompanyService;
 import ua.martynenko.vacancymvc.service.VacancyService;
@@ -27,7 +31,7 @@ import ua.martynenko.vacancymvc.service.VacancyService;
 @RequestMapping("/")
 @SessionAttributes("companies")
 public class AppController {
-
+    private static final Logger log = LoggerFactory.getLogger(AppController.class);
     @Autowired
     VacancyService vacancyService;
     @Autowired
@@ -129,7 +133,75 @@ public class AppController {
             }
         }
 
+        if(name.equals("intropro-llc")) {
+            List<Vacancy> vacancyListIntropro = new IntroproStrategy().getVacancies();
+            for (int i = 0; i < vacancyListIntropro.size(); i++) {
+                if (vacancyService.findVacancyByLink(vacancyListIntropro.get(i).getLink()) == null) {
+                    vacancyListIntropro.get(i).setCompany(serviceCompany.findCompanyByUrl("http://www.intropro.com/"));
+                    vacancyListIntropro.get(i).setActive(true);
+                    vacancyService.saveVacancy(vacancyListIntropro.get(i));
+                }else {
+                    vacancyListIntropro.get(i).setActive(false);
+                }
+            }
+        }
+
+        if(name.equals("ab-soft")) {
+            List<Vacancy> vacancyListAbSoft = new IntroproStrategy().getVacancies();
+            for (int i = 0; i < vacancyListAbSoft.size(); i++) {
+                if (vacancyService.findVacancyByLink(vacancyListAbSoft.get(i).getLink(), vacancyListAbSoft.get(i).getTitle()) == null) {
+                    vacancyListAbSoft.get(i).setCompany(serviceCompany.findCompanyByUrl("http://ab-soft.net/"));
+                    vacancyListAbSoft.get(i).setActive(true);
+                    vacancyService.saveVacancy(vacancyListAbSoft.get(i));
+                }else {
+                    vacancyListAbSoft.get(i).setActive(false);
+                }
+            }
+        }
+
+
+
         return "redirect:/vacancy/list/";
     }
+    /*
+    This method will refresh allVacancy, adding new
+     */
+//    @RequestMapping(value = {"/parse/{name}-company/"}, method = RequestMethod.GET)
+//    public String refresh(@PathVariable String name) {
+//        if(name.equals("intropro-llc")) {
+//            List<Vacancy> vacancyListIntropro = new IntroproStrategy().getVacancies();
+//            for (int i = 0; i < vacancyListIntropro.size(); i++) {
+//                if (vacancyService.findVacancyByLink(vacancyListIntropro.get(i).getLink()) == null) {
+//                    vacancyListIntropro.get(i).setCompany(serviceCompany.findCompanyByUrl("http://www.intropro.com/"));
+//                    vacancyService.saveVacancy(vacancyListIntropro.get(i));
+//                }
+//            }
+//        }
+//        List<Vacancy> vacancyListAstound = new AstoundStrategy().getVacancies();
+//        for (int i = 0; i < vacancyListAstound.size(); i++) {
+//            if (!vacancyService.isVacancyLinkUnique(vacancyListAstound.get(i).getLink())) {
+//                vacancyListAstound.get(i).setCompany(serviceCompany.findCompanyByUrl("http://astoundcommerce.com"));
+//                vacancyService.saveVacancy(vacancyListAstound.get(i));
+//            }
+//        }
+//        List<Vacancy> vacancyListLuxoft = new LuxoftStrategy().getVacancies();
+//        for (int i = 0; i < vacancyListLuxoft.size(); i++) {
+//            if (!vacancyService.isVacancyLinkUnique(vacancyListLuxoft.get(i).getLink())) {
+//                vacancyListLuxoft.get(i).setCompany(serviceCompany.findCompanyByUrl("http://www.luxoft.com"));
+//                vacancyService.saveVacancy(vacancyListLuxoft.get(i));
+//            }
+//        }
+//
+//        List<Vacancy> vacancyListAbsoft = new AbsoftStrategy().getVacancies();
+//        for (int i = 0; i < vacancyListAbsoft.size(); i++) {
+//            if (!vacancyService.isVacancyLinkUnique(vacancyListAbsoft.get(i).getLink())) {
+//                vacancyListAbsoft.get(i).setCompany(serviceCompany.findCompanyByUrl("http://www.Ab-soft.net"));
+//                vacancyService.saveVacancy(vacancyListAbsoft.get(i));
+//            }
+//        }
+//        return "redirect:/vacancy/list/";
+//    }
+
+
 
 }
