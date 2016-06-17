@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.service;
 
-/**
- * Created by Martynenko on 23.04.2016.
- */
 import java.util.List;
 
 import ua.martynenko.vacancymvc.model.Company;

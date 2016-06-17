@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Nikola on 26.05.2016.
- */
 public class AbsoftStrategy implements Strategy {
 
     ArrayList<Vacancy> listOfVacancies = new ArrayList<Vacancy>();

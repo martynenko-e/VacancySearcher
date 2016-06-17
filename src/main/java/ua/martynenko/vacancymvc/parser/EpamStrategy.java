@@ -1,9 +1,17 @@
 package ua.martynenko.vacancymvc.parser;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.ScriptResult;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.*;
+import org.apache.log4j.BasicConfigurator;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Test;
+import org.springframework.util.Assert;
 import ua.martynenko.vacancymvc.model.Company;
 import ua.martynenko.vacancymvc.model.Vacancy;
 
@@ -12,32 +20,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Nikola on 01.06.2016.
- */
-public class EpamStrategy implements Strategy {
+public class EpamStrategy  implements Strategy{
 
     ArrayList<Vacancy> listOfVacancies = new ArrayList<Vacancy>();
     Document doc;
-    Document docs;
-    int count = 0;
-    int count1 = 0;
+
     @Override
     public List<Vacancy> getVacancies() {
         try {
-            doc = Jsoup.connect("https://jobs.dou.ua/companies").timeout(2000).get();
-            Element elements = doc.select(".more-btn").first();
-            System.out.println(elements);
-//            Elements listCompany = doc.select(".h2").select("a[href]:first-child");
-//            for (int i = 0; i < listCompany.size(); i++){
-//                count++;
-//                System.out.println(count + ". " + listCompany.get(i).text());
-//
-//            }
+            BasicConfigurator.configure();
+            WebClient webClient = new WebClient();
 
+            webClient.waitForBackgroundJavaScriptStartingBefore(10000);
+            HtmlPage page = webClient.getPage("https://jobs.dou.ua/companies");
 
+            String javaScriptCode = "javascript:;";
 
-
+            ScriptResult result = page.executeJavaScript(javaScriptCode);
+            result.getJavaScriptResult();
+            System.out.println("result: "+ result);
 
 //           for (Element element : listCompany) {
 //                docs = Jsoup.connect(element.attr("href").toString()).timeout(2000).get();

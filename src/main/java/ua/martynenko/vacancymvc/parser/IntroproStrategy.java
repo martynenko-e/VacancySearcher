@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Nikola on 20.05.2016.
- */
 public class IntroproStrategy implements Strategy{
 
     ArrayList<Vacancy> listOfVacancies = new ArrayList<Vacancy>();

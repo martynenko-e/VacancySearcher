@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.controller;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import java.util.List;
 import java.util.Locale;
 

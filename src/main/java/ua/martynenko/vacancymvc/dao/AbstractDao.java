@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.dao;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import java.io.Serializable;
 
 import java.lang.reflect.ParameterizedType;

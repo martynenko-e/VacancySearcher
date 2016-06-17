@@ -8,10 +8,6 @@ import ua.martynenko.vacancymvc.model.Company;
 
 import java.util.List;
 
-/**
- * Created by Martynenko on 23.04.2016.
- */
-
 @Repository("companyDao")
 public class CompanyDaoImpl extends AbstractDao<Integer, Company> implements CompanyDao {
     public Company findById(Integer id) {

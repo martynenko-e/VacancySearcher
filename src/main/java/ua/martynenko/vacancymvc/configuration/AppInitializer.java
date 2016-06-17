@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.configuration;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

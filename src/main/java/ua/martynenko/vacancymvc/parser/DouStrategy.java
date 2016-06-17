@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Nikola on 01.06.2016.
- */
 public class DouStrategy implements Strategy {
 
     ArrayList<Vacancy> listOfVacancies = new ArrayList<Vacancy>();

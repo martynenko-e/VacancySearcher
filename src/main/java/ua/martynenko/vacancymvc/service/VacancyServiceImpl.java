@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.service;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by user on 05.01.2016.
- */
 public class LuxoftStrategy implements Strategy {
     @Override
     public List<Vacancy> getVacancies() {

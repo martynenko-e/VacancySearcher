@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.configuration;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import java.util.Properties;
 
 import javax.sql.DataSource;

@@ -1,8 +1,5 @@
 package ua.martynenko.vacancymvc.model;
 
-/**
- * Created by Martynenko on 22.04.2016.
- */
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 

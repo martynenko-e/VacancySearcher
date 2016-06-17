@@ -11,9 +11,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Martynenko on 19.05.2016.
- */
 public class CompanyParse {
     public List<Company> getCompanies() {
         Document doc;
